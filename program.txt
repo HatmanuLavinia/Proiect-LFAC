@@ -1,0 +1,6 @@
+int @a, @b, @c;
+const int @b:=5;
+    begin_progr
+@fct(2,3,@a);
+@a:=100;
+    end_progr
