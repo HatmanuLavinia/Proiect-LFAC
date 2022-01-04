@@ -26,13 +26,13 @@
 "&&" {return ANDOP;}
 "||" {return OROP;}
 "!" {return NEG_OP;}
-@[_a-zA-Z][_a-zA-Z0-9]* {return ID;}
 ":=" {return ASSIGN;}
 [0-9]+ {return NR;}
 "{" {return LB;}
 "}" {return RB;}
-EVAL {return EVAL;}
-PRINT {return PRINT;}
+EVAL {return EVAL;} 
+PRINT {return PRINT;} 
+[_a-zA-Z][_a-zA-Z0-9]* {return ID;}
 [ \t] ;
 \n {yylineno++;}
 . {return yytext[0];}
