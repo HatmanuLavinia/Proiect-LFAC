@@ -4,10 +4,10 @@
 %}
 %option noyywrap
 %%
-"int"|"float"|"char"|"string" {return TIP;}
+"int"|"float"|"char"|"string"|"bool"|"undefined" {yylval.strval = strdup(yytext); return TIP;}
+"constant" {return CONST;}
 "begin_progr" {return BGIN;}
 "end_progr" {return END;}
-"const" {return CONST;}
 "if" {return IF;}
 "else" {return ELSE;}
 "while" {return WHILE;}
@@ -26,13 +26,18 @@
 "&&" {return ANDOP;}
 "||" {return OROP;}
 "!" {return NEG_OP;}
+"strcpy"|"strcat" {return STR_OP;}
+@[_a-zA-Z][_a-zA-Z0-9]* {yylval.strval = strdup(yytext); return ID;}
+\"[ !-~]+\" {yylval.strval = strdup(yytext); return TEXT;}
+'[ !-~]' {yylval.charval = yytext[1];return CHR;}
 ":=" {return ASSIGN;}
-[0-9]+ {return NR;}
+[1-9]+[0-9]* {yylval.val = atoi(yytext); return NR; }
+0+[0-9]* {yylval.strval = strdup(yytext);return FLT;}
+0 {yylval.val = atoi(yytext);return NR;}
 "{" {return LB;}
 "}" {return RB;}
-EVAL {return EVAL;} 
-PRINT {return PRINT;} 
-[_a-zA-Z][_a-zA-Z0-9]* {return ID;}
+EVAL {return EVAL;}
+PRINT {return PRINT;}
 [ \t] ;
 \n {yylineno++;}
 . {return yytext[0];}
