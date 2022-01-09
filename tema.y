@@ -6,19 +6,24 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+
 #define UNDEFINED -1
 #define INT 1
 #define FLOAT 2
 #define CHAR 3
 #define STRING 4
 #define BOOL 5
+
 #define VAR 0
 #define CON 1
+
 #define NOFUNCTION 0
 #define REGULARFUNCTION 1
 #define METHOD 2
+
 #define STBINDEX 50
 #define MAXPARAMS 10
+
 #define PLUS 0
 #define MINUS 1
 #define STAR 2
@@ -32,11 +37,11 @@
 
 struct info
 {
-        int intval;
-        char strval[100];
-        float floatval;
-        char charval;
-        int type;
+    int intval;
+    char strval[100];
+    float floatval;
+    char charval;
+    int type;
 };
 
 struct param
@@ -99,6 +104,7 @@ void checkForFunction(char* key,struct param *params);
 void assignIDtoInfo(char* key,struct info *inf);
 void insertVectorIntoList(char *tip,int index,char* key);
 int getVectorVal(char * key, int i);
+
 extern FILE* yyin;
 extern char* yytext;
 extern int yylineno;
@@ -138,6 +144,7 @@ extern int yylineno;
 %type <val>operator
 %type <inf>identifier
 %type <inf>param
+
 %start progr
 
 %left '+' '-'
@@ -148,8 +155,7 @@ extern int yylineno;
 progr: declaratii bloc {printf("program corect sintactic\n");}
      ;
 
-declaratii :
-	   	   |  declaratie  ';' 
+declaratii :  declaratie  ';' 
 	   	   | declaratii declaratie ';' 
 	       ;
 
@@ -313,7 +319,8 @@ void initParamList(struct param *paramlist)
 
 void initList()
 {
-	for(int i =0;i<=STBINDEX-1;i++)
+	int i =0;
+	while(i<STBINDEX)
 	{
 		bzero(symbolTable[i].denumire,50);
 		symbolTable[i].type = -1;
@@ -326,6 +333,8 @@ void initList()
 		symbolTable[i].function = NOFUNCTION;
 		initParamList(symbolTable[i].params);
 		symbolTable[i].vector = 0;
+		
+		i++;
 	}
 }
 
@@ -423,18 +432,18 @@ int getCurrentScopeIndex()
 
 }
 
-void rmv(int ind)
+void rmv(int i)
 {
-	if(symbolTable[ind].type == STRING && symbolTable[ind].assigned == 1)
-		free(symbolTable[ind].stringVal);
-	bzero(symbolTable[ind].denumire,50);
-    symbolTable[ind].type = -1;
-    symbolTable[ind].scope = -1;
-    symbolTable[ind].intVal = 0;
-    symbolTable[ind].floatVal = 0;
-    symbolTable[ind].charVal = '\0';
-    symbolTable[ind].stringVal = NULL;
-	symbolTable[ind].assigned = 0;
+	if(symbolTable[i].type == STRING && symbolTable[i].assigned == 1)
+		free(symbolTable[i].stringVal);
+	bzero(symbolTable[i].denumire,50);
+    symbolTable[i].type = -1;
+    symbolTable[i].scope = -1;
+    symbolTable[i].intVal = 0;
+    symbolTable[i].floatVal = 0;
+    symbolTable[i].charVal = '\0';
+    symbolTable[i].stringVal = NULL;
+	symbolTable[i].assigned = 0;
 }
 
 void popScope(int delete)
@@ -468,10 +477,12 @@ float convertToFloat(int part1,int part2)
 	float k = part1;
 	int temp = part2,count=0;
 	while(temp!=0)
-		count++,temp=temp/10;
+	{
+		count++;
+		temp=temp/10;
+	}
 	if(count !=0)
 		k = k + (float)part2/(10^count);
-	//printf("k = %f\n count = %d\n",k,part2/count)
 	return k;
 }
 
@@ -533,7 +544,6 @@ void assignVal(struct var *v,struct info *inf)
         {
             switch (symbolTable[ind].type){
             case INT:
-				//printf("writing %d to %s at key %d\n",inf->intval,v->key,v->index);
                 symbolTable[ind].intVector[v->index] = inf->intval;
                 break;
             case STRING:
@@ -745,7 +755,10 @@ void insertFunctionIntoTable(struct param *paramList,char* type,char *key)
 	int r = 0;
 	int k = findInList(key);
 	if(k != -1)
-		printf("%s already exists!\n",key),exit(3);
+	{
+		printf("%s already exists!\n",key);
+		exit(3);
+	}
 	k = ind(key);
 	strcpy(symbolTable[k].denumire,key);
 	symbolTable[k].type = findType(type);
@@ -886,7 +899,8 @@ int printList()
 {
 	remove("symbol_table.txt");
 	FILE *f = fopen("symbol_table.txt","a");
-	for(int i = 0;i<=STBINDEX-1;i++)
+	int i=0;
+	while(i<STBINDEX)
 	{
 		if(symbolTable[i].type != -1 && symbolTable[i].function == NOFUNCTION)
 		{
@@ -938,7 +952,8 @@ int printList()
 				}
 			}
 			fprintf(f,"\n\n");
-		}		
+		}
+		i++;		
 	}
 	fprintf(f,"\n\nFUNCTII:\n\n");
 	for(int i = 0;i<=STBINDEX-1;i++)

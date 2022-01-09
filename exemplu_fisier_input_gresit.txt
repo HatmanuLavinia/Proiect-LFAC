@@ -1,0 +1,39 @@
+int @x;
+int @x;
+int @x1;
+int @x2;
+float @f1;
+string @s;
+
+int @testFunction(int @u, float @t) {
+    @u:=2;
+    @t:=5;
+};
+
+int @testFunction(int @u, float @t) {
+    @u:=34;
+    @t:=@x+2;
+};
+
+int @testFunction(float @u, float @t) {
+    @u:=@x/2;
+    @t:=5;
+};
+
+int @test(int @param) {
+    @param:=6;
+};
+
+begin_progr
+
+    @x3 := @x + 2;
+    @f1 := @x + @x2;
+    @f1 := @test(5) + @x;
+    @x := @s + @f1;
+    @test(f1);
+    EVAL(@x+90);
+    PRINT;
+
+end_progr
+
+

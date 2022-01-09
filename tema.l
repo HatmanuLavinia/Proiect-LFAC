@@ -33,7 +33,6 @@
 ":=" {return ASSIGN;}
 [1-9]+[0-9]* {yylval.val = atoi(yytext); return NR; }
 0+[0-9]* {yylval.strval = strdup(yytext);return FLT;}
-0 {yylval.val = atoi(yytext);return NR;}
 "{" {return LB;}
 "}" {return RB;}
 EVAL {return EVAL;}
