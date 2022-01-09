@@ -1,58 +1,70 @@
-int @i;
-int @e1;
-bool @e2;
-float @f;
-int[10] @vector;
-char[50] @cuvant;
-string @str;
-string[10] @strvec;
-int @max(int @a, int @b)
+class hello
 {
-	@f:=1,2;
-};
+int method(int param);
+private : int x;
+int member;
 
+}
 
-begin_progr
-int @j;
-@j:=1;
-for(int @j:=1; @j<10; @j:=@j+1) {
-    @i:=100;
-};
-@str:="abc";
-@strvec[1] := "c++";
-@strvec[2]:=@str;
-class @Student {
-    public string @nume;
-    private int @notaLfac;
+int suma(int a, int b);
 
-    public int @getNume() {
-        @i:=100;
-    };
-    public int @setNota() {
-        @i:=10;
-    };
-};
-if(@j>3)
-{
-	@j:=@j+1;
-};
-while(@i>@j)
-{
-	@j:=@j+@i;
-};
-@e1 := ((1 + 2) * 2) - ((2 * 1000) / 2);
-@e2 := (1 && 2) || @e1;
+bool estePrim(int n);
+ 
+char str;
+char myChar;
+int arr[10];
+int f() ;
+bool c;
+bool c;
+const int d;
+int calc;
 
-strcpy(@s1, @s2);
-strcat(@s1, @s2);
+{ char myChar;
+  int b;
+  if ( b > 10 ){ 
+	b := 3;
+  } else {
+  	b := 20;
+  }
+  b := b + 10;
+  while ( k > 10 ){
+	k := k - 1;
+  }
+  int i; 
+  int aux;
+  for ( i := 1; i <= n; i := i + 1 ){
+	aux := 100;
+  }
+  
+  calc := 2 + 3 - 5;
+  
+  char str;
+  
+  myChar ::= "anaaremere";
+  char copie;
+  copie ::= myChar;
+  char propozitie;
+  propozitie ::= "ana are 2 mere";
+  myChar3 ::= ("anaare" ~ "mere");
+  myChar4 ::= ("unu" ~ "doi");
 
-@max(@j, @i);
-@max(@j,1);
-@vector[1]:=3;
-@vector[2]:=@i;
-@vector[3]:=@vector[1];
-EVAL(1+(@j+@vector[1]));
+  int dublura;
+  int dublura;  
+  
+  c := 1;
+  
+  int x;
+  x := strlen("anaaremere");
+  y := strlen("ana");
+  
+  int int_error;
+  char str_error;
+  str_error ::= 1;
+  int_error := "denied";
+ 
+  Eval(2 + 3 - 4);
+  
+  float f;
+  f := 3.2;
+}
 
-PRINT;
-
-end_progr

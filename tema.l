@@ -4,39 +4,45 @@
 %}
 %option noyywrap
 %%
-"int"|"float"|"char"|"string"|"bool"|"undefined" {yylval.strval = strdup(yytext); return TIP;}
-"constant" {return CONST;}
-"begin_progr" {return BGIN;}
-"end_progr" {return END;}
-"if" {return IF;}
-"else" {return ELSE;}
+"void" {return VOID;}
+("const ")?"int" {return INT;}
+"bool" {return BOOL;}
+("const ")?"char" {return CHAR;}
+("const ")?"float" {return FLOAT;}
+"class" {return CLASS;}
+"Eval" {return EVAL;}
+"private"|"protected"|"public" {return ACCESS;}
+"{" {return BGIN;}
+"}" {return END;}
+"+" {return PLUS;}
+"-" {return MINUS;}
+"/" {return DIV;}
+"*" {return MUL;}
+"%" {return MOD;}
 "while" {return WHILE;}
 "for" {return FOR;}
-"class" {return CLASS;}
-"private"|"protected"|"public" {return CLASS_SPEC;}
-"true"|"false" {return BOOL_VAR;}
-"<" {return LESSOP;}
-"<=" {return LESSEQOP;}
-">" {return GROP;}
-">=" {return GREQOP;}
-"+" {return PLUSOP;}
-"-" {return MINUSOP;}
-"*" {return STAROP;}
-"/" {return SLASHOP;}
-"&&" {return ANDOP;}
-"||" {return OROP;}
-"!" {return NEG_OP;}
-"strcpy"|"strcat" {return STR_OP;}
-@[_a-zA-Z][_a-zA-Z0-9]* {yylval.strval = strdup(yytext); return ID;}
-\"[ !-~]+\" {yylval.strval = strdup(yytext); return TEXT;}
-'[ !-~]' {yylval.charval = yytext[1];return CHR;}
+"if" {return IF;}
+"else" {return ELSE;}
+"return" {return RETURN;}
+"strlen" {return STRLEN;}
+[0-9]+"."[0-9]+ {return VAL_FLOAT;}
+[_a-zA-Z][_a-zA-Z0-9]* {yylval.strval=strdup(yytext);return ID;}
+["][.a-zA-Z0-9 ]+["] {yylval.strval=strdup(yytext);return STRING;}
+[0-9]+ {yylval.intval=atoi(yytext);return NR;}
+[_a-zA-Z][_a-zA-Z0-9]*("["[0-9]+"]") {return ARRAY;}
 ":=" {return ASSIGN;}
-[1-9]+[0-9]* {yylval.val = atoi(yytext); return NR; }
-0+[0-9]* {yylval.strval = strdup(yytext);return FLT;}
-"{" {return LB;}
-"}" {return RB;}
-EVAL {return EVAL;}
-PRINT {return PRINT;}
+"::=" {return ASSIGN_STR;}
+"&&" {return AND;}
+"||" {return OR;}
+">" {return GT;}
+"<" {return LT;}
+"<=" {return LEQ;}
+">=" {return GEQ;}
+"==" {return EQ;}
+"!=" {return NEQ;}
 [ \t] ;
 \n {yylineno++;}
 . {return yytext[0];}
+
+
+
