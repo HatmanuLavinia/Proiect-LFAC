@@ -56,11 +56,10 @@ char *strval;
 %%
 progr: declaratii bloc {printf("program corect sintactic\n");}
      | declaratii {printf("program corect sintactic\n");}
-	;
-declaratii :
-	    declaratie
-	   | declaratii declaratie
-	;
+	 ;
+declaratii : declaratie
+	       | declaratii declaratie
+	       ;
 declaratie : INT ID ';' {
 							strcpy(var,$2);
 							if (cauta(var,n_global,declGlobal) == -1) {
@@ -102,20 +101,31 @@ declaratie : INT ID ';' {
 								yyerror("Variabila deja declarata!");	   
 						 }
 	   	   | CLASS ID blocClass
-           | INT ARRAY ';' 
+           | INT ARRAY ';'
+		   | INT assignment ';'
+		   | FLOAT assignment  ';'
+		   | STRING assignment  ';'
+		   | CHAR assignment ';'
+		   | BOOL assignment ';'
            | decl_functie 
            ;
 decl_functie : INT ID '(' lista_param ')' ';' {
 												strcpy(var,$2); 
 												addFunction(var,"int");
 											  }
-	   		 | INT ID '(' lista_param ')' blocFunctie  
+	   		 | INT ID '(' lista_param ')' blocFunctie {
+														strcpy(var,$2); 
+														addFunction(var,"int");
+													} 
              | INT ID '(' ')' ';'
              | VOID ID '(' lista_param ')' ';' {
 												  strcpy(var,$2);
 												  addFunction(var,"void");
 											   }
-           	 | VOID ID '(' ')' blocFunctieVoid 
+           	 | VOID ID '(' lista_param  ')' blocFunctieVoid {
+															strcpy(var,$2); 
+															addFunction(var,"void");
+														}
              | BOOL ID '(' lista_param ')' ';' {
 												   strcpy(var,$2); 
 												   addFunction(var,"bool");
@@ -268,6 +278,10 @@ param : INT ID {
 				strcpy(var,$2); 
 				addParam(var,"string");
 				}
+	  | FLOAT ID {
+				strcpy(var,$2); 
+				addParam(var,"float");
+				}
 	  ;
 
 /* bloc */
@@ -349,6 +363,7 @@ assignment : assign_exp
 		   | ID ASSIGN VAL_FLOAT
 		   | ID ASSIGN_STR NR {yyerror("Nu poti atribui unei variabile de tip string un int!");}
 		   | ID ASSIGN STRING {yyerror("Nu poti atribui unei variabile de tip int un string!");}
+		   | ARRAY ASSIGN NR
 	       ; 
 	
 assign_str : ID ASSIGN_STR STRING {
@@ -376,7 +391,7 @@ assign_str : ID ASSIGN_STR STRING {
 															strcpy(valStr,$4);
 															strcat(valStr,$6);
 															addValueToStrings(var,valStr);
-													}
+													     }
 		   ;
 
 oper_str : STRING
@@ -384,7 +399,10 @@ oper_str : STRING
          ;
 
 lista_apel : NR
+		   | ID
            | lista_apel ',' NR
+		   | lista_apel ',' ID
+		   | ID '(' lista_apel ')' ',' aexp
            ;
 
 assign_exp : ID ASSIGN aexp {
@@ -410,8 +428,10 @@ aexp :  NR
 				strcpy(var,$1);
 				int poz=cauta(var,n,decl);
 				$$=valori[poz];
-			}      
-	 | aexp PLUS aexp {$$=$1 + $3;}
+			}
+	 | ARRAY 
+	 | ID '(' lista_apel ')'   
+	 | aexp  PLUS aexp {$$=$1 + $3;}
 	 | aexp MINUS aexp {$$=$1 - $3;}
 	 | aexp DIV aexp {$$=$1 / $3;}
 	 | aexp MOD aexp {$$=$1 % $3;}
@@ -434,7 +454,7 @@ printf("eroare: %s la linia:%d\n",s,yylineno);
 }
 int addParam(char* nume, char *tip) {
 	FILE *fptr;
-	fptr = fopen("symbol_table.txt", "a+");
+	fptr = fopen("symbol_table_functions.txt", "a+");
 	strcpy(obiect.nume,nume);
 	strcpy(obiect.type, tip);
 	fprintf(fptr,"- PARAMETRUL CU NUMELE %s DE TIPUL %s\n",obiect.nume,obiect.type);
@@ -447,7 +467,7 @@ int addIntoTable(char* nume, char *tip, char* scop, int val) {
 	strcpy(obiect.scope, scop);
 	obiect.valoareVar = val;
 	if (val == -1)
-		fprintf(fptr,"\nNUME %s - TIP %s - SCOPE %s - NU ARE INCA VALOARE\n", obiect.nume, obiect.type, obiect.scope); 
+		fprintf(fptr,"\nNUME %s \nTIP %s \nSCOPE %s \nNU ARE INCA VALOARE\n", obiect.nume, obiect.type, obiect.scope); 
 	close(fptr);
 }
 int addValueToStrings(char *nume, char* valoare) {
@@ -468,11 +488,12 @@ int addValueToVar(char *nume, int valoare) {
 }
 int addFunction(char *nume, char *tip) {
 	FILE *fptr;
-	fptr = fopen("symbol_table.txt", "a+");
+	fptr = fopen("symbol_table_functions.txt", "a+");
 	strcpy(obiect.nume,nume);
 	strcpy(obiect.type,tip);
 	fprintf(fptr,"\nFUNCTIA %s - TIP %s\n",obiect.nume,obiect.type);
-	close(fptr);}
+	close(fptr);
+}
 
 int addMethod(char *nume, char *tip) {
 	FILE *fptr;
@@ -494,6 +515,8 @@ int cauta(char *nume, int n, char vector[][100]) {
 }
 
 int main(int argc, char** argv){
+	remove("symbol_table.txt");
+	remove("symbol_table_functions.txt");
 	yyin=fopen(argv[1],"r");
 	yyparse();
 } 

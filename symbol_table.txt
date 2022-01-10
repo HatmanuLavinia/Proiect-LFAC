@@ -1,0 +1,15 @@
+
+NUME a 
+TIP int 
+SCOPE global 
+NU ARE INCA VALOARE
+
+NUME x2 
+TIP int 
+SCOPE global 
+NU ARE INCA VALOARE
+
+NUME x1 
+TIP int 
+SCOPE global 
+NU ARE INCA VALOARE

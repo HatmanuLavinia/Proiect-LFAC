@@ -1,0 +1,36 @@
+int x := 23;
+int x1;
+int x1;
+int x2;
+const int a;
+float f1 := 50.0;
+char s ::= "ana";
+
+int testFunction(int x, float z) {
+  x:=2;
+  return x;
+}
+
+int testFunction(int x, float z) {
+  x:=2;
+  return x;
+}
+
+int testFunction(float x, float z) {
+  x:=5;
+  return x;
+}
+
+void test(int param) {
+  param:=2;
+}
+
+{
+  
+  x3 := x + 2;
+  f1 := x + x2;
+  f1 := test (5) + x;
+  x := s + f1;
+  test(f1);
+}
+

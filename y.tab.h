@@ -50,26 +50,98 @@ extern int yydebug;
   enum yytokentype
   {
     ID = 258,
-    TIP = 259,
-    BGIN = 260,
-    END = 261,
-    ASSIGN = 262,
-    NR = 263,
-    CONST = 264
+    INT = 259,
+    BOOL = 260,
+    FLOAT = 261,
+    BGIN = 262,
+    END = 263,
+    ASSIGN = 264,
+    CLASS = 265,
+    ACCESS = 266,
+    PLUS = 267,
+    MINUS = 268,
+    DIV = 269,
+    MUL = 270,
+    MOD = 271,
+    GT = 272,
+    LT = 273,
+    GEQ = 274,
+    LEQ = 275,
+    EQ = 276,
+    NEQ = 277,
+    AND = 278,
+    OR = 279,
+    ARRAY = 280,
+    STRLEN = 281,
+    ASSIGN_STR = 282,
+    CHAR = 283,
+    IF = 284,
+    ELSE = 285,
+    WHILE = 286,
+    FOR = 287,
+    ASSIGN_BOOL = 288,
+    VAL_FLOAT = 289,
+    EVAL = 290,
+    RETURN = 291,
+    VOID = 292,
+    NR = 293,
+    STRING = 294,
+    IFX = 295
   };
 #endif
 /* Tokens.  */
 #define ID 258
-#define TIP 259
-#define BGIN 260
-#define END 261
-#define ASSIGN 262
-#define NR 263
-#define CONST 264
+#define INT 259
+#define BOOL 260
+#define FLOAT 261
+#define BGIN 262
+#define END 263
+#define ASSIGN 264
+#define CLASS 265
+#define ACCESS 266
+#define PLUS 267
+#define MINUS 268
+#define DIV 269
+#define MUL 270
+#define MOD 271
+#define GT 272
+#define LT 273
+#define GEQ 274
+#define LEQ 275
+#define EQ 276
+#define NEQ 277
+#define AND 278
+#define OR 279
+#define ARRAY 280
+#define STRLEN 281
+#define ASSIGN_STR 282
+#define CHAR 283
+#define IF 284
+#define ELSE 285
+#define WHILE 286
+#define FOR 287
+#define ASSIGN_BOOL 288
+#define VAL_FLOAT 289
+#define EVAL 290
+#define RETURN 291
+#define VOID 292
+#define NR 293
+#define STRING 294
+#define IFX 295
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+union YYSTYPE
+{
+#line 37 "tema.y"
+
+int intval;
+char *strval;
+
+#line 142 "y.tab.h"
+
+};
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif

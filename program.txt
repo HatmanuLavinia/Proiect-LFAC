@@ -19,52 +19,53 @@ bool c;
 const int d;
 int calc;
 
-{ char myChar;
-  int b;
-  if ( b > 10 ){ 
-	b := 3;
-  } else {
-  	b := 20;
-  }
-  b := b + 10;
-  while ( k > 10 ){
-	k := k - 1;
-  }
-  int i; 
-  int aux;
-  for ( i := 1; i <= n; i := i + 1 ){
-	aux := 100;
-  }
-  
-  calc := 2 + 3 - 5;
-  
-  char str;
-  
-  myChar ::= "anaaremere";
-  char copie;
-  copie ::= myChar;
-  char propozitie;
-  propozitie ::= "ana are 2 mere";
-  myChar3 ::= ("anaare" ~ "mere");
-  myChar4 ::= ("unu" ~ "doi");
+  { char myChar;
+    int b;
+      if ( b > 10 ){ 
+      b := 3;
+      } else {
+        b := 20;
+      }
+    b := b + 10;
+      while ( k > 10 ){
+      k := k - 1;
+      }
+    int i; 
+    int aux;
+      for ( i := 1; i <= n; i := i + 1 ){
+      aux := 100;
+      }
+    
+    calc := 2 + 3 - 5;
+    
+    char str;
+    
+    myChar ::= "anaaremere";
+    char copie;
+    copie ::= myChar;
+    char propozitie;
+    propozitie ::= "ana are 2 mere";
+    myChar3 ::= ("anaare" ~ "mere");
+    myChar4 ::= ("unu" ~ "doi");
 
-  int dublura;
-  int dublura;  
+    int dublura;
+    int dublura;  
+    
+    c := 1;
+
+    arr[2]:=3;  
+    int x;
+    x := strlen("anaaremere");
+    y := strlen("ana");
+    
+    int int_error;
+    char str_error;
+    str_error ::= 1;
+    int_error := "denied";
   
-  c := 1;
-  
-  int x;
-  x := strlen("anaaremere");
-  y := strlen("ana");
-  
-  int int_error;
-  char str_error;
-  str_error ::= 1;
-  int_error := "denied";
- 
-  Eval(2 + 3 - 4);
-  
-  float f;
-  f := 3.2;
+    Eval(2 + 3 - 4);
+    
+    float f;
+    f := 3.2;
 }
 
