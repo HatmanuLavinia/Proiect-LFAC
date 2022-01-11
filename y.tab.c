@@ -619,17 +619,17 @@ static const yytype_int8 yytranslate[] =
 static const yytype_int16 yyrline[] =
 {
        0,    57,    57,    58,    60,    61,    63,    73,    83,    93,
-     103,   104,   105,   106,   107,   108,   109,   110,   112,   116,
-     120,   121,   125,   129,   136,   138,   140,   141,   143,   144,
-     145,   146,   147,   157,   167,   177,   187,   190,   193,   194,
-     195,   198,   208,   218,   228,   238,   239,   240,   244,   248,
-     252,   256,   260,   266,   267,   269,   273,   277,   281,   288,
-     291,   292,   295,   296,   297,   298,   299,   309,   319,   329,
-     339,   350,   351,   352,   353,   354,   357,   360,   361,   362,
-     363,   364,   365,   366,   369,   380,   389,   397,   398,   401,
-     402,   403,   404,   405,   408,   419,   426,   427,   432,   433,
-     434,   435,   436,   437,   438,   441,   442,   443,   444,   445,
-     446,   447,   448
+     103,   104,   105,   106,   107,   108,   109,   110,   112,   123,
+     134,   135,   146,   157,   171,   173,   175,   176,   178,   179,
+     180,   181,   182,   192,   202,   212,   222,   225,   228,   229,
+     230,   233,   243,   253,   263,   273,   274,   275,   279,   283,
+     287,   291,   295,   301,   302,   304,   308,   312,   316,   323,
+     326,   327,   330,   331,   332,   333,   334,   344,   354,   364,
+     374,   385,   386,   387,   388,   389,   392,   395,   396,   397,
+     398,   399,   400,   401,   404,   415,   424,   432,   433,   436,
+     437,   438,   439,   440,   443,   454,   461,   462,   467,   468,
+     469,   470,   471,   472,   473,   476,   477,   478,   479,   480,
+     481,   482,   483
 };
 #endif
 
@@ -1628,7 +1628,7 @@ yyreduce:
                         {
 							strcpy(var,(yyvsp[-1].strval));
 							if (cauta(var,n_global,declGlobal) == -1) {
-									strcpy(declGlobal[n],var);
+									strcpy(declGlobal[n_global],var);
 									n_global++;
 									addIntoTable(var,"int","global",-1);
 							}
@@ -1643,7 +1643,7 @@ yyreduce:
                          {
 							strcpy(var,(yyvsp[-1].strval));
 							if (cauta(var,n_global,declGlobal)==-1) {
-								strcpy(declGlobal[n],var);
+								strcpy(declGlobal[n_global],var);
 								n_global++;
 								addIntoTable(var,"bool","global",-1);
 							}
@@ -1658,7 +1658,7 @@ yyreduce:
                                   {
 							strcpy(var,(yyvsp[-1].strval));
 							if (cauta(var,n_global,declGlobal)==-1) {
-								strcpy(declGlobal[n],var);
+								strcpy(declGlobal[n_global],var);
 								n_global++;
 								addIntoTable(var,"float","global",-1);
 							}
@@ -1673,7 +1673,7 @@ yyreduce:
                              {
 							strcpy(var,(yyvsp[-1].strval));
 							if (cauta(var,n_global,declGlobal)==-1) {
-								strcpy(declGlobal[n],var);
+								strcpy(declGlobal[n_global],var);
 								n_global++;
 								addIntoTable(var,"string","global",-1);
 								}
@@ -1687,265 +1687,300 @@ yyreduce:
 #line 112 "tema.y"
                                               {
 												strcpy(var,(yyvsp[-4].strval)); 
+												if (cauta(var,n_functie,declFunctie)==-1) {
+												strcpy(declFunctie[n_functie],var);
+												n_functie++;
 												addFunction(var,"int");
+												}
+											else   
+												yyerror("Functie deja declarata!");
+												
 											  }
-#line 1693 "y.tab.c"
+#line 1700 "y.tab.c"
     break;
 
   case 19:
-#line 116 "tema.y"
+#line 123 "tema.y"
                                                                   {
-														strcpy(var,(yyvsp[-4].strval)); 
-														addFunction(var,"int");
-													}
-#line 1702 "y.tab.c"
+												strcpy(var,(yyvsp[-4].strval)); 
+												if (cauta(var,n_functie,declFunctie)==-1) {
+												strcpy(declFunctie[n_functie],var);
+												n_functie++;
+												addFunction(var,"int");
+												}
+											else   
+												yyerror("Functie deja declarata!");
+												
+											  }
+#line 1716 "y.tab.c"
     break;
 
   case 21:
-#line 121 "tema.y"
+#line 135 "tema.y"
                                                {
-												  strcpy(var,(yyvsp[-4].strval));
-												  addFunction(var,"void");
-											   }
-#line 1711 "y.tab.c"
+												strcpy(var,(yyvsp[-4].strval)); 
+												if (cauta(var,n_functie,declFunctie)==-1) {
+												strcpy(declFunctie[n_functie],var);
+												n_functie++;
+												addFunction(var,"void");
+												}
+											else   
+												yyerror("Functie deja declarata!");
+												
+											  }
+#line 1732 "y.tab.c"
     break;
 
   case 22:
-#line 125 "tema.y"
+#line 146 "tema.y"
                                                                 {
 															strcpy(var,(yyvsp[-4].strval)); 
+															if (cauta(var,n_functie,declFunctie)==-1) {
+															strcpy(declFunctie[n_functie],var);
+															n_functie++;
 															addFunction(var,"void");
+															}
+														else   
+															yyerror("Functie deja declarata!");
+															
 														}
-#line 1720 "y.tab.c"
+#line 1748 "y.tab.c"
     break;
 
   case 23:
-#line 129 "tema.y"
+#line 157 "tema.y"
                                                {
-												   strcpy(var,(yyvsp[-4].strval)); 
-												   addFunction(var,"bool");
-											   }
-#line 1729 "y.tab.c"
+												strcpy(var,(yyvsp[-4].strval)); 
+												if (cauta(var,n_functie,declFunctie)==-1) {
+												strcpy(declFunctie[n_functie],var);
+												n_functie++;
+												addFunction(var,"bool");
+												}
+											else   
+												yyerror("Functie deja declarata!");
+												
+											  }
+#line 1764 "y.tab.c"
     break;
 
   case 32:
-#line 147 "tema.y"
+#line 182 "tema.y"
                                    {
 								strcpy(var,(yyvsp[-1].strval));
 								if (cauta(var,n_functie,declFunctie)==-1) {
-									strcpy(declFunctie[n],var);
+									strcpy(declFunctie[n_functie],var);
 									n_functie++;
 									addIntoTable(var,"int","inside function",-1);
 									}
 								else   
 									yyerror("Variabila deja declarata!");	   
 							   }
-#line 1744 "y.tab.c"
+#line 1779 "y.tab.c"
     break;
 
   case 33:
-#line 157 "tema.y"
+#line 192 "tema.y"
                                 {
 								strcpy(var,(yyvsp[-1].strval));
 								if (cauta(var,n_functie,declFunctie)==-1) {
-									strcpy(declFunctie[n],var);
+									strcpy(declFunctie[n_functie],var);
 									n_functie++;
 									addIntoTable(var,"bool","inside function",-1);
 									}
 								else   
 									yyerror("Variabila deja declarata!");	   
 							    }
-#line 1759 "y.tab.c"
+#line 1794 "y.tab.c"
     break;
 
   case 34:
-#line 167 "tema.y"
+#line 202 "tema.y"
                                                  {
 								  strcpy(var,(yyvsp[-1].strval));
 								  if (cauta(var,n_functie,declFunctie)==-1) {
-									  strcpy(declFunctie[n],var);
+									  strcpy(declFunctie[n_functie],var);
 									  n_functie++;
 									  addIntoTable(var,"float","inside function",-1);
 									  }
 								  else   
 									  yyerror("Variabila deja declarata!");	   
 							     }
-#line 1774 "y.tab.c"
+#line 1809 "y.tab.c"
     break;
 
   case 35:
-#line 177 "tema.y"
+#line 212 "tema.y"
                                                 {
 								strcpy(var,(yyvsp[-1].strval));
 								if (cauta(var,n_functie,declFunctie)==-1) {
-									strcpy(declFunctie[n],var);
+									strcpy(declFunctie[n_functie],var);
 									n_functie++;
 									addIntoTable(var,"string","inside function",-1);
 									}
 								else   
 									yyerror("Variabila deja declarata!");	   
 							    }
-#line 1789 "y.tab.c"
+#line 1824 "y.tab.c"
     break;
 
   case 41:
-#line 198 "tema.y"
+#line 233 "tema.y"
                              {
 							 strcpy(var,(yyvsp[-1].strval));
 							 if (cauta(var,n_class,declClass)==-1) {
-								 strcpy(declClass[n],var);
+								 strcpy(declClass[n_class],var);
 								 n_class++;
 								 addIntoTable(var,"int","inside class",-1);
 								 }
 							 else   
 								 yyerror("Variabila deja declarata!");	   
 						     }
-#line 1804 "y.tab.c"
+#line 1839 "y.tab.c"
     break;
 
   case 42:
-#line 208 "tema.y"
+#line 243 "tema.y"
                                 {
 							strcpy(var,(yyvsp[-1].strval));
 							if (cauta(var,n_class,declClass)==-1) {
-								strcpy(declClass[n],var);
+								strcpy(declClass[n_class],var);
 								n_class++;
 								addIntoTable(var,"bool","inside class",-1);
 								}
 							else   
 								yyerror("Variabila deja declarata!");	   
 						}
-#line 1819 "y.tab.c"
+#line 1854 "y.tab.c"
     break;
 
   case 43:
-#line 218 "tema.y"
+#line 253 "tema.y"
                                  {
 							 strcpy(var,(yyvsp[-1].strval));
 							 if (cauta(var,n_class,declClass)==-1) {
-								 strcpy(declClass[n],var);
+								 strcpy(declClass[n_class],var);
 								 n_class++;
 								 addIntoTable(var,"float","inside class",-1);
 								 }
 							 else   
 								 yyerror("Variabila deja declarata!");	   
 						    }
-#line 1834 "y.tab.c"
+#line 1869 "y.tab.c"
     break;
 
   case 44:
-#line 228 "tema.y"
+#line 263 "tema.y"
                                         {
 							strcpy(var,(yyvsp[-1].strval));
 							if (cauta(var,n_class,declClass)==-1) {
-								strcpy(declClass[n],var);
+								strcpy(declClass[n_class],var);
 								n_class++;
 								addIntoTable(var,"string","inside class",-1);
 								}
 							else   
 								yyerror("Variabila deja declarata!");	   
 						    }
-#line 1849 "y.tab.c"
+#line 1884 "y.tab.c"
     break;
 
   case 47:
-#line 240 "tema.y"
+#line 275 "tema.y"
                                                    {
 												strcpy(var,(yyvsp[-4].strval)); 
 												addMethod(var,"int");
 											   }
-#line 1858 "y.tab.c"
+#line 1893 "y.tab.c"
     break;
 
   case 48:
-#line 244 "tema.y"
+#line 279 "tema.y"
                                                                    {
 														strcpy(var,(yyvsp[-4].strval)); 
 														addMethod(var,"int");
 													   }
-#line 1867 "y.tab.c"
+#line 1902 "y.tab.c"
     break;
 
   case 49:
-#line 248 "tema.y"
+#line 283 "tema.y"
                                       {
 								   strcpy(var,(yyvsp[-3].strval)); 
 								   addMethod(var,"int");
 								  }
-#line 1876 "y.tab.c"
+#line 1911 "y.tab.c"
     break;
 
   case 50:
-#line 252 "tema.y"
+#line 287 "tema.y"
                                                 {
 													strcpy(var,(yyvsp[-4].strval));
 													addMethod(var,"void");
 												}
-#line 1885 "y.tab.c"
+#line 1920 "y.tab.c"
     break;
 
   case 51:
-#line 256 "tema.y"
+#line 291 "tema.y"
                                                     {
 													strcpy(var,(yyvsp[-3].strval));
 													addMethod(var,"void");
 												}
-#line 1894 "y.tab.c"
+#line 1929 "y.tab.c"
     break;
 
   case 52:
-#line 260 "tema.y"
+#line 295 "tema.y"
                                                     {
 													strcpy(var,(yyvsp[-4].strval)); 
 													addMethod(var,"bool");
 												}
-#line 1903 "y.tab.c"
+#line 1938 "y.tab.c"
     break;
 
   case 55:
-#line 269 "tema.y"
+#line 304 "tema.y"
                {
 				strcpy(var,(yyvsp[0].strval)); 
 				addParam(var,"int");
 				}
-#line 1912 "y.tab.c"
+#line 1947 "y.tab.c"
     break;
 
   case 56:
-#line 273 "tema.y"
+#line 308 "tema.y"
                     {
 					strcpy(var,(yyvsp[0].strval)); 
 					addParam(var,"bool");
 				}
-#line 1921 "y.tab.c"
+#line 1956 "y.tab.c"
     break;
 
   case 57:
-#line 277 "tema.y"
+#line 312 "tema.y"
                     {
 				strcpy(var,(yyvsp[0].strval)); 
 				addParam(var,"string");
 				}
-#line 1930 "y.tab.c"
+#line 1965 "y.tab.c"
     break;
 
   case 58:
-#line 281 "tema.y"
+#line 316 "tema.y"
                      {
 				strcpy(var,(yyvsp[0].strval)); 
 				addParam(var,"float");
 				}
-#line 1939 "y.tab.c"
+#line 1974 "y.tab.c"
     break;
 
   case 65:
-#line 298 "tema.y"
+#line 333 "tema.y"
                                      {printf("Expresia a fost evaluata si are valoarea %d\n",(yyvsp[-2].intval));}
-#line 1945 "y.tab.c"
+#line 1980 "y.tab.c"
     break;
 
   case 66:
-#line 299 "tema.y"
+#line 334 "tema.y"
                           {
 						strcpy(var,(yyvsp[-1].strval));
 						if (cauta(var,n,decl)==-1) {
@@ -1956,11 +1991,11 @@ yyreduce:
 					  else   
 						  yyerror("Variabila deja declarata!");	   
 				     }
-#line 1960 "y.tab.c"
+#line 1995 "y.tab.c"
     break;
 
   case 67:
-#line 309 "tema.y"
+#line 344 "tema.y"
                        {
 						strcpy(var,(yyvsp[-1].strval));
 						if (cauta(var,n,decl)==-1) {
@@ -1971,11 +2006,11 @@ yyreduce:
 						else   
 							yyerror("Variabila deja declarata!");	   
 					}
-#line 1975 "y.tab.c"
+#line 2010 "y.tab.c"
     break;
 
   case 68:
-#line 319 "tema.y"
+#line 354 "tema.y"
                             {
 							strcpy(var,(yyvsp[-1].strval));
 							if (cauta(var,n,decl)==-1) {
@@ -1986,11 +2021,11 @@ yyreduce:
 							else   
 								yyerror("Variabila deja declarata!");	   
 						}
-#line 1990 "y.tab.c"
+#line 2025 "y.tab.c"
     break;
 
   case 69:
-#line 329 "tema.y"
+#line 364 "tema.y"
                            {
 							strcpy(var,(yyvsp[-1].strval));
 							if (cauta(var,n,decl)==-1) {
@@ -2001,11 +2036,11 @@ yyreduce:
 							else   
 								yyerror("Variabila deja declarata!");	   
 						}
-#line 2005 "y.tab.c"
+#line 2040 "y.tab.c"
     break;
 
   case 70:
-#line 339 "tema.y"
+#line 374 "tema.y"
                          {
 							strcpy(var,(yyvsp[-1].strval));
 							if (cauta(var,n,decl)==-1) {
@@ -2016,23 +2051,23 @@ yyreduce:
 							else   
 								yyerror("Variabila deja declarata!");	   
 						}
-#line 2020 "y.tab.c"
+#line 2055 "y.tab.c"
     break;
 
   case 81:
-#line 364 "tema.y"
+#line 399 "tema.y"
                                       {yyerror("Nu poti atribui unei variabile de tip string un int!");}
-#line 2026 "y.tab.c"
+#line 2061 "y.tab.c"
     break;
 
   case 82:
-#line 365 "tema.y"
+#line 400 "tema.y"
                                       {yyerror("Nu poti atribui unei variabile de tip int un string!");}
-#line 2032 "y.tab.c"
+#line 2067 "y.tab.c"
     break;
 
   case 84:
-#line 369 "tema.y"
+#line 404 "tema.y"
                                   {
 									strcpy(var,(yyvsp[-2].strval));
 									if (cauta(var,n,decl)==-1 && cauta(var,n_global,declGlobal)==-1) 
@@ -2044,11 +2079,11 @@ yyreduce:
 										addValueToStrings(var,valStr);
 									}
 								   }
-#line 2048 "y.tab.c"
+#line 2083 "y.tab.c"
     break;
 
   case 85:
-#line 380 "tema.y"
+#line 415 "tema.y"
                                   {
 									strcpy(var,(yyvsp[-2].strval));
 									strcpy(aux,(yyvsp[0].strval));
@@ -2058,22 +2093,22 @@ yyreduce:
 										strcpy(valoriStr[poz2],valoriStr[poz1]);
 									addValueToStrings(var,valoriStr[poz2]);
 								}
-#line 2062 "y.tab.c"
+#line 2097 "y.tab.c"
     break;
 
   case 86:
-#line 389 "tema.y"
+#line 424 "tema.y"
                                                              {
 															strcpy(var,(yyvsp[-6].strval));
 															strcpy(valStr,(yyvsp[-3].strval));
 															strcat(valStr,(yyvsp[-1].strval));
 															addValueToStrings(var,valStr);
 													     }
-#line 2073 "y.tab.c"
+#line 2108 "y.tab.c"
     break;
 
   case 94:
-#line 408 "tema.y"
+#line 443 "tema.y"
                             {
 								strcpy(var,(yyvsp[-2].strval)); 
 								value = (yyvsp[0].intval); 
@@ -2085,109 +2120,109 @@ yyreduce:
 									addValueToVar(var,value);
 								}
 							}
-#line 2089 "y.tab.c"
+#line 2124 "y.tab.c"
     break;
 
   case 95:
-#line 419 "tema.y"
+#line 454 "tema.y"
                                                    {
 													strcpy(var,(yyvsp[-5].strval));
 													value = strlen((yyvsp[-1].strval)) - 2;
 													addValueToVar(var,value);
 										       }
-#line 2099 "y.tab.c"
+#line 2134 "y.tab.c"
     break;
 
   case 97:
-#line 427 "tema.y"
+#line 462 "tema.y"
               {
 				strcpy(var,(yyvsp[0].strval));
 				int poz=cauta(var,n,decl);
 				(yyval.intval)=valori[poz];
 			}
-#line 2109 "y.tab.c"
+#line 2144 "y.tab.c"
     break;
 
   case 100:
-#line 434 "tema.y"
+#line 469 "tema.y"
                            {(yyval.intval)=(yyvsp[-2].intval) + (yyvsp[0].intval);}
-#line 2115 "y.tab.c"
+#line 2150 "y.tab.c"
     break;
 
   case 101:
-#line 435 "tema.y"
+#line 470 "tema.y"
                            {(yyval.intval)=(yyvsp[-2].intval) - (yyvsp[0].intval);}
-#line 2121 "y.tab.c"
+#line 2156 "y.tab.c"
     break;
 
   case 102:
-#line 436 "tema.y"
+#line 471 "tema.y"
                          {(yyval.intval)=(yyvsp[-2].intval) / (yyvsp[0].intval);}
-#line 2127 "y.tab.c"
+#line 2162 "y.tab.c"
     break;
 
   case 103:
-#line 437 "tema.y"
+#line 472 "tema.y"
                          {(yyval.intval)=(yyvsp[-2].intval) % (yyvsp[0].intval);}
-#line 2133 "y.tab.c"
+#line 2168 "y.tab.c"
     break;
 
   case 104:
-#line 438 "tema.y"
+#line 473 "tema.y"
                          {(yyval.intval)=(yyvsp[-2].intval) * (yyvsp[0].intval);}
-#line 2139 "y.tab.c"
+#line 2174 "y.tab.c"
     break;
 
   case 105:
-#line 441 "tema.y"
+#line 476 "tema.y"
                      { if ((yyvsp[-2].intval) && (yyvsp[0].intval)) (yyval.intval)=1; else (yyval.intval)=0;}
-#line 2145 "y.tab.c"
+#line 2180 "y.tab.c"
     break;
 
   case 106:
-#line 442 "tema.y"
+#line 477 "tema.y"
                         { if ((yyvsp[-2].intval) || (yyvsp[0].intval)) (yyval.intval)=1; else (yyval.intval)=0;}
-#line 2151 "y.tab.c"
+#line 2186 "y.tab.c"
     break;
 
   case 107:
-#line 443 "tema.y"
+#line 478 "tema.y"
                         { if ((yyvsp[-2].intval) > (yyvsp[0].intval)) (yyval.intval)=1; else (yyval.intval)=0;}
-#line 2157 "y.tab.c"
+#line 2192 "y.tab.c"
     break;
 
   case 108:
-#line 444 "tema.y"
+#line 479 "tema.y"
                         { if ((yyvsp[-2].intval) < (yyvsp[0].intval)) (yyval.intval)=1; else (yyval.intval)=0;}
-#line 2163 "y.tab.c"
+#line 2198 "y.tab.c"
     break;
 
   case 109:
-#line 445 "tema.y"
+#line 480 "tema.y"
                          { if ((yyvsp[-2].intval) >= (yyvsp[0].intval)) (yyval.intval)=1; else (yyval.intval)=0;}
-#line 2169 "y.tab.c"
+#line 2204 "y.tab.c"
     break;
 
   case 110:
-#line 446 "tema.y"
+#line 481 "tema.y"
                          { if ((yyvsp[-2].intval) <= (yyvsp[0].intval)) (yyval.intval)=1; else (yyval.intval)=0;}
-#line 2175 "y.tab.c"
+#line 2210 "y.tab.c"
     break;
 
   case 111:
-#line 447 "tema.y"
+#line 482 "tema.y"
                         { if ((yyvsp[-2].intval) == (yyvsp[0].intval)) (yyval.intval)=1; else (yyval.intval)=0;}
-#line 2181 "y.tab.c"
+#line 2216 "y.tab.c"
     break;
 
   case 112:
-#line 448 "tema.y"
+#line 483 "tema.y"
                          { if ((yyvsp[-2].intval) != (yyvsp[0].intval)) (yyval.intval)=1; else (yyval.intval)=0;}
-#line 2187 "y.tab.c"
+#line 2222 "y.tab.c"
     break;
 
 
-#line 2191 "y.tab.c"
+#line 2226 "y.tab.c"
 
       default: break;
     }
@@ -2419,7 +2454,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 451 "tema.y"
+#line 486 "tema.y"
 
 int yyerror(char * s){
 printf("eroare: %s la linia:%d\n",s,yylineno);
@@ -2469,7 +2504,7 @@ int addFunction(char *nume, char *tip) {
 
 int addMethod(char *nume, char *tip) {
 	FILE *fptr;
-	fptr = fopen("symbol_table.txt","a+");
+	fptr = fopen("symbol_table_functions.txt","a+");
 	strcpy(obiect.nume,nume);
 	strcpy(obiect.type,tip);
 	fprintf(fptr,"\nFUNCTIA %s - TIP %s este metoda in clasa\n",obiect.nume,obiect.type);

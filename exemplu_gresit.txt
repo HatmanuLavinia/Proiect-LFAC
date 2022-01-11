@@ -2,7 +2,6 @@ int x := 23;
 int x1;
 int x1;
 int x2;
-const int a;
 float f1 := 50.0;
 char s ::= "ana";
 

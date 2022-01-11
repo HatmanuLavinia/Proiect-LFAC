@@ -63,7 +63,7 @@ declaratii : declaratie
 declaratie : INT ID ';' {
 							strcpy(var,$2);
 							if (cauta(var,n_global,declGlobal) == -1) {
-									strcpy(declGlobal[n],var);
+									strcpy(declGlobal[n_global],var);
 									n_global++;
 									addIntoTable(var,"int","global",-1);
 							}
@@ -73,7 +73,7 @@ declaratie : INT ID ';' {
            | BOOL ID ';' {
 							strcpy(var,$2);
 							if (cauta(var,n_global,declGlobal)==-1) {
-								strcpy(declGlobal[n],var);
+								strcpy(declGlobal[n_global],var);
 								n_global++;
 								addIntoTable(var,"bool","global",-1);
 							}
@@ -83,7 +83,7 @@ declaratie : INT ID ';' {
 	   	   | FLOAT ID ';' {
 							strcpy(var,$2);
 							if (cauta(var,n_global,declGlobal)==-1) {
-								strcpy(declGlobal[n],var);
+								strcpy(declGlobal[n_global],var);
 								n_global++;
 								addIntoTable(var,"float","global",-1);
 							}
@@ -93,7 +93,7 @@ declaratie : INT ID ';' {
 	       | CHAR ID ';' {
 							strcpy(var,$2);
 							if (cauta(var,n_global,declGlobal)==-1) {
-								strcpy(declGlobal[n],var);
+								strcpy(declGlobal[n_global],var);
 								n_global++;
 								addIntoTable(var,"string","global",-1);
 								}
@@ -111,25 +111,60 @@ declaratie : INT ID ';' {
            ;
 decl_functie : INT ID '(' lista_param ')' ';' {
 												strcpy(var,$2); 
+												if (cauta(var,n_functie,declFunctie)==-1) {
+												strcpy(declFunctie[n_functie],var);
+												n_functie++;
 												addFunction(var,"int");
+												}
+											else   
+												yyerror("Functie deja declarata!");
+												
 											  }
 	   		 | INT ID '(' lista_param ')' blocFunctie {
-														strcpy(var,$2); 
-														addFunction(var,"int");
-													} 
+												strcpy(var,$2); 
+												if (cauta(var,n_functie,declFunctie)==-1) {
+												strcpy(declFunctie[n_functie],var);
+												n_functie++;
+												addFunction(var,"int");
+												}
+											else   
+												yyerror("Functie deja declarata!");
+												
+											  }
              | INT ID '(' ')' ';'
              | VOID ID '(' lista_param ')' ';' {
-												  strcpy(var,$2);
-												  addFunction(var,"void");
-											   }
+												strcpy(var,$2); 
+												if (cauta(var,n_functie,declFunctie)==-1) {
+												strcpy(declFunctie[n_functie],var);
+												n_functie++;
+												addFunction(var,"void");
+												}
+											else   
+												yyerror("Functie deja declarata!");
+												
+											  }
            	 | VOID ID '(' lista_param  ')' blocFunctieVoid {
 															strcpy(var,$2); 
+															if (cauta(var,n_functie,declFunctie)==-1) {
+															strcpy(declFunctie[n_functie],var);
+															n_functie++;
 															addFunction(var,"void");
+															}
+														else   
+															yyerror("Functie deja declarata!");
+															
 														}
              | BOOL ID '(' lista_param ')' ';' {
-												   strcpy(var,$2); 
-												   addFunction(var,"bool");
-											   }
+												strcpy(var,$2); 
+												if (cauta(var,n_functie,declFunctie)==-1) {
+												strcpy(declFunctie[n_functie],var);
+												n_functie++;
+												addFunction(var,"bool");
+												}
+											else   
+												yyerror("Functie deja declarata!");
+												
+											  }
            	 ;
 
 
@@ -147,7 +182,7 @@ statement_functie : ID '(' lista_apel ')' ';'
 	              | INT ID ';' {
 								strcpy(var,$2);
 								if (cauta(var,n_functie,declFunctie)==-1) {
-									strcpy(declFunctie[n],var);
+									strcpy(declFunctie[n_functie],var);
 									n_functie++;
 									addIntoTable(var,"int","inside function",-1);
 									}
@@ -157,7 +192,7 @@ statement_functie : ID '(' lista_apel ')' ';'
                   | BOOL ID ';' {
 								strcpy(var,$2);
 								if (cauta(var,n_functie,declFunctie)==-1) {
-									strcpy(declFunctie[n],var);
+									strcpy(declFunctie[n_functie],var);
 									n_functie++;
 									addIntoTable(var,"bool","inside function",-1);
 									}
@@ -167,7 +202,7 @@ statement_functie : ID '(' lista_apel ')' ';'
 				  | FLOAT ID ';' {
 								  strcpy(var,$2);
 								  if (cauta(var,n_functie,declFunctie)==-1) {
-									  strcpy(declFunctie[n],var);
+									  strcpy(declFunctie[n_functie],var);
 									  n_functie++;
 									  addIntoTable(var,"float","inside function",-1);
 									  }
@@ -177,7 +212,7 @@ statement_functie : ID '(' lista_apel ')' ';'
 				  | CHAR ID ';' {
 								strcpy(var,$2);
 								if (cauta(var,n_functie,declFunctie)==-1) {
-									strcpy(declFunctie[n],var);
+									strcpy(declFunctie[n_functie],var);
 									n_functie++;
 									addIntoTable(var,"string","inside function",-1);
 									}
@@ -198,7 +233,7 @@ listClass : ACCESS ':' listClass
 statementClass :  INT ID ';' {
 							 strcpy(var,$2);
 							 if (cauta(var,n_class,declClass)==-1) {
-								 strcpy(declClass[n],var);
+								 strcpy(declClass[n_class],var);
 								 n_class++;
 								 addIntoTable(var,"int","inside class",-1);
 								 }
@@ -208,7 +243,7 @@ statementClass :  INT ID ';' {
         	  | BOOL ID ';' {
 							strcpy(var,$2);
 							if (cauta(var,n_class,declClass)==-1) {
-								strcpy(declClass[n],var);
+								strcpy(declClass[n_class],var);
 								n_class++;
 								addIntoTable(var,"bool","inside class",-1);
 								}
@@ -218,7 +253,7 @@ statementClass :  INT ID ';' {
 	          | FLOAT ID ';' {
 							 strcpy(var,$2);
 							 if (cauta(var,n_class,declClass)==-1) {
-								 strcpy(declClass[n],var);
+								 strcpy(declClass[n_class],var);
 								 n_class++;
 								 addIntoTable(var,"float","inside class",-1);
 								 }
@@ -228,7 +263,7 @@ statementClass :  INT ID ';' {
 			  | CHAR ID ';' {
 							strcpy(var,$2);
 							if (cauta(var,n_class,declClass)==-1) {
-								strcpy(declClass[n],var);
+								strcpy(declClass[n_class],var);
 								n_class++;
 								addIntoTable(var,"string","inside class",-1);
 								}
@@ -497,7 +532,7 @@ int addFunction(char *nume, char *tip) {
 
 int addMethod(char *nume, char *tip) {
 	FILE *fptr;
-	fptr = fopen("symbol_table.txt","a+");
+	fptr = fopen("symbol_table_functions.txt","a+");
 	strcpy(obiect.nume,nume);
 	strcpy(obiect.type,tip);
 	fprintf(fptr,"\nFUNCTIA %s - TIP %s este metoda in clasa\n",obiect.nume,obiect.type);

@@ -6,7 +6,14 @@ int member;
 
 }
 
-int suma(int a, int b);
+void suma(int a, int b);
+
+int par(int a){
+  if(a%2==0)
+    return a;
+}
+
+int par(int a);
 
 bool estePrim(int n);
  
@@ -15,9 +22,7 @@ char myChar;
 int arr[10];
 int f() ;
 bool c;
-bool c;
 const int d;
-int calc;
 
   { char myChar;
     int b;
@@ -63,7 +68,9 @@ int calc;
     str_error ::= 1;
     int_error := "denied";
   
-    Eval(2 + 3 - 4);
+    int a;
+    a:=10/2+5*2;
+    Eval(a+30/2-5*2);
     
     float f;
     f := 3.2;
